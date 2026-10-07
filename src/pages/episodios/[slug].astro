@@ -11,8 +11,8 @@ const { episode: e } = Astro.props;
   <article class="max-w-4xl mx-auto px-4 py-12">
     <a href="/episodios" class="text-sm text-faded-copper-700 font-bold hover:underline">← Todos los episodios</a>
     <p class="mt-6 text-xs font-bold text-crushed-berry-600 uppercase tracking-[0.3em]">Episodio {e.num} · {e.type}</p>
-    <h1 class="font-serif font-black text-4xl md:text-5xl leading-tight mt-2 mb-4">{e.title}</h1>
-    <p class="text-lg text-pitch-black-900/70 mb-8 max-w-2xl">{e.desc}</p>
+    <h1 class="font-arvo font-black text-4xl md:text-5xl leading-tight mt-2 mb-4">{e.title}</h1>
+    <p class="text-lg font-nunito text-pitch-black-900/70 mb-8 max-w-2xl">{e.desc}</p>
 
     <!-- Reproductor placeholder -->
     <!-- Reproductor -->
@@ -54,7 +54,7 @@ const { episode: e } = Astro.props;
       </div>
       <div class="p-6 md:p-8">
       <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <h2 class="font-serif font-black text-2xl">Ficha patrimonial</h2>
+        <h2 class="font-arvo font-black text-2xl">Ficha patrimonial</h2>
         <div class="flex gap-3">
           <a href="#" class="bg-faded-copper hover:bg-faded-copper-700 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors">Descargar PDF</a>
           <a href="#" class="border-2 border-crushed-berry-600 text-crushed-berry-600 hover:bg-crushed-berry-600 hover:text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors">Imprimir</a>
@@ -76,10 +76,10 @@ const { episode: e } = Astro.props;
 
     <div class="grid md:grid-cols-3 gap-8">
       <section class="md:col-span-2">
-        <h2 class="font-serif font-black text-2xl mb-3">Transcripción</h2>
+        <h2 class="font-arvo font-black text-2xl mb-3">Transcripción</h2>
         <p class="text-pitch-black-900/70 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <p class="text-pitch-black-900/70 text-sm leading-relaxed mt-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <h2 class="font-serif font-black text-2xl mt-10 mb-3">Galería fotográfica</h2>
+        <h2 class="font-arvo font-black text-2xl mt-10 mb-3">Galería fotográfica</h2>
         <div class="grid grid-cols-3 gap-3">
           <img src={`/img/episodes/${e.slug}.jpg`} alt={`Fotografía de ${e.title}`} class="aspect-square object-cover rounded-xl col-span-2 row-span-2"/>
           {[1,2].map(i => (
@@ -89,7 +89,7 @@ const { episode: e } = Astro.props;
       </section>
       <aside>
         <div class="bg-orange-600 text-camel-50 rounded-2xl p-6 sticky top-28 border-b-8 border-faded-copper">
-          <h3 class="font-serif font-bold text-xl mb-4">Sobre este episodio</h3>
+          <h3 class="font-arvo font-bold text-xl mb-4">Sobre este episodio</h3>
           <ul class="text-sm space-y-3">
             <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Estado</span><span class="font-bold">{e.status}</span></li>
             <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Episodio</span><span class="font-bold">{String(e.num).padStart(2,'0')}/10</span></li>
