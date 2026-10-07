@@ -15,13 +15,35 @@ const { episode: e } = Astro.props;
     <p class="text-lg text-pitch-black-900/70 mb-8 max-w-2xl">{e.desc}</p>
 
     <!-- Reproductor placeholder -->
-    <div class="aspect-video relative rounded-2xl grid place-items-center mb-10 border-b-8 border-faded-copper overflow-hidden">
-      <img src={`/img/episodes/${e.slug}.jpg`} alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-30"/>
-      <div class="absolute inset-0 bg-pitch-black-950/60"></div>
-      {e.status === 'Disponible'
-        ? <p class="text-camel-50/50 text-sm">[ Aquí se embebe el video de YouTube ]</p>
-        : <p class="text-camel-50/50 text-sm">🎬 Episodio en producción</p>}
-    </div>
+    <!-- Reproductor -->
+<div class="aspect-video relative rounded-2xl overflow-hidden mb-10 border-b-8 border-faded-copper bg-pitch-black-950">
+  {e.status === 'Disponible' && e.videoId
+    ? (
+      <iframe
+        class="absolute inset-0 w-full h-full"
+        src={`https://www.youtube-nocookie.com/embed/${e.videoId}`}
+        title={`E${e.num} · ${e.title}`}
+        frameborder="0"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    )
+    : (
+      <>
+        <img
+          src={`/img/episodes/${e.slug}.jpg`}
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 w-full h-full object-cover opacity-30"
+        />
+        <div class="absolute inset-0 bg-pitch-black-950/60"></div>
+        <p class="absolute inset-0 grid place-items-center text-camel-50/50 text-sm">
+          🎬 Episodio en producción
+        </p>
+      </>
+    )}
+</div>
 
     <!-- FICHA PATRIMONIAL DESCARGABLE -->
     <section class="bg-white border-2 border-faded-copper/30 rounded-2xl overflow-hidden mb-12">
@@ -66,14 +88,21 @@ const { episode: e } = Astro.props;
         </div>
       </section>
       <aside>
-        <div class="bg-mahogany-red-900 text-camel-50 rounded-2xl p-6 sticky top-28 border-b-8 border-faded-copper">
+        <div class="bg-orange-600 text-camel-50 rounded-2xl p-6 sticky top-28 border-b-8 border-faded-copper">
           <h3 class="font-serif font-bold text-xl mb-4">Sobre este episodio</h3>
           <ul class="text-sm space-y-3">
             <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Estado</span><span class="font-bold">{e.status}</span></li>
             <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Episodio</span><span class="font-bold">{String(e.num).padStart(2,'0')}/10</span></li>
             <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Licencia</span><span class="font-bold">CC BY-NC</span></li>
           </ul>
-          <a href="#" class="mt-6 block text-center bg-camel-100 text-mahogany-red-900 text-sm font-bold px-4 py-3 rounded-full hover:bg-camel-300 transition-colors">Ver en YouTube</a>
+          <a
+  href={e.videoId ? `https://www.youtube.com/watch?v=${e.videoId}` : '#'}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="mt-6 block text-center bg-camel-100 text-mahogany-red-900 text-sm font-bold px-4 py-3 rounded-full hover:bg-camel-300 transition-colors"
+>
+  {e.videoId ? 'Ver en YouTube' : 'Próximamente'}
+</a>
         </div>
       </aside>
     </div>

@@ -6,7 +6,8 @@
     "type": "Oficio",
     "desc": "Cosecha, zarandeo en coligües, cocción en pailas de cobre y fermentación en tinajas de greda: los saberes de los últimos chicheros acreditados ante INDAP.",
     "duration": "32 min",
-    "status": "Disponible"
+    "status": "Disponible",
+    "videoId": "46WgzyFnyuk"
   },
   {
     "slug": "talabarteria-tradicion-del-cuero",
@@ -15,7 +16,8 @@
     "type": "Oficio",
     "desc": "El trabajo del cuero transmitido por tres generaciones: herramientas, técnicas y memoria de los arreos y la vida huasa.",
     "duration": "28 min",
-    "status": "Disponible"
+    "status": "Disponible",
+    "videoId": "ple_bLBbC7I"
   },
   {
     "slug": "bordadoras-del-puangue",
@@ -24,7 +26,8 @@
     "type": "Oficio",
     "desc": "Mujeres guardianas del bordado tradicional: puntadas heredadas que narran identidad, fe y territorio en las manos de la agrupación.",
     "duration": "30 min",
-    "status": "Disponible"
+    "status": "Disponible",
+    "videoId": "uR0wcKgxI84"
   },
   {
     "slug": "reposteria-de-la-memoria",
@@ -33,7 +36,8 @@
     "type": "Oficio",
     "desc": "Recetas heredadas de dulces y repostería curacavina: sabores que resisten la industrialización y conservan la cocina de las abuelas.",
     "duration": "26 min",
-    "status": "Próximamente"
+    "status": "Disponible",
+    "videoId": "3bE4INaSXEA"
   },
   {
     "slug": "fiesta-de-cuasimodo",
@@ -42,7 +46,8 @@
     "type": "Tradición",
     "desc": "Devoción, territorio y cultura huasa: la fiesta que articula a la comunidad y cuya transmisión oral necesita registro audiovisual.",
     "duration": "35 min",
-    "status": "Disponible"
+    "status": "Disponible",
+    "videoId": "J_NEaQbmEr0"
   },
   {
     "slug": "academia-guzman-danza-folclorica",
@@ -51,7 +56,8 @@
     "type": "Tradición",
     "desc": "El relevo de las danzas folclóricas: pasos, trajes y oficio de enseñar a bailar a nuevas generaciones.",
     "duration": "29 min",
-    "status": "Próximamente"
+    "status": "Disponible",
+    "videoId": "_eHLxHdF4MU"
   },
   {
     "slug": "luis-gumera-cronista",
@@ -60,7 +66,8 @@
     "type": "Memoria",
     "desc": "\"En la ribera del Puangue\": el cronista que guarda la historia escrita de Curacaví y las voces de quienes la vivieron.",
     "duration": "31 min",
-    "status": "Disponible"
+    "status": "Disponible",
+    "videoId": "XaKmNAc9oyw"
   },
   {
     "slug": "museo-coculcom",
@@ -69,7 +76,8 @@
     "type": "Memoria",
     "desc": "Objetos y fotografías donados por los habitantes: la memoria comunitaria resguardada bajo el liderazgo de Nelda Calderón.",
     "duration": "27 min",
-    "status": "Próximamente"
+    "status": "Disponible",
+    "videoId": "0VcSMSVmZc8"
   },
   {
     "slug": "museo-del-audio",
@@ -78,7 +86,8 @@
     "type": "Memoria",
     "desc": "Más de 200 años de historia de la reproducción sonora en un museo inscrito en el Registro de Museos de Chile.",
     "duration": "33 min",
-    "status": "Próximamente"
+    "status": "Disponible",
+    "videoId": "ybWPXbZAw7Y"
   },
   {
     "slug": "parque-san-mateo",
@@ -87,6 +96,7 @@
     "type": "Paisaje cultural",
     "desc": "Un bosque nativo construido por vecinos con metodología Miyawaki desde 2019: recuperación socioecológica y educación ambiental intergeneracional.",
     "duration": "30 min",
-    "status": "Próximamente"
+    "status": "Disponible",
+    "videoId": "o8L32NPN0f4"
   }
 ]
