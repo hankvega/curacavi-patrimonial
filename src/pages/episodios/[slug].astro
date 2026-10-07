@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import episodes from '../../data/episodes.json';
+
+export function getStaticPaths() {
+  return episodes.map(e => ({ params: { slug: e.slug }, props: { episode: e } }));
+}
+const { episode: e } = Astro.props;
+---
+<Base title={`E${e.num} · ${e.title}`} description={e.desc}>
+  <article class="max-w-4xl mx-auto px-4 py-12">
+    <a href="/episodios" class="text-sm text-faded-copper-700 font-bold hover:underline">← Todos los episodios</a>
+    <p class="mt-6 text-xs font-bold text-crushed-berry-600 uppercase tracking-[0.3em]">Episodio {e.num} · {e.type}</p>
+    <h1 class="font-serif font-black text-4xl md:text-5xl leading-tight mt-2 mb-4">{e.title}</h1>
+    <p class="text-lg text-pitch-black-900/70 mb-8 max-w-2xl">{e.desc}</p>
+
+    <!-- Reproductor placeholder -->
+    <div class="aspect-video relative rounded-2xl grid place-items-center mb-10 border-b-8 border-faded-copper overflow-hidden">
+      <img src={`/img/episodes/${e.slug}.jpg`} alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-30"/>
+      <div class="absolute inset-0 bg-pitch-black-950/60"></div>
+      {e.status === 'Disponible'
+        ? <p class="text-camel-50/50 text-sm">[ Aquí se embebe el video de YouTube ]</p>
+        : <p class="text-camel-50/50 text-sm">🎬 Episodio en producción</p>}
+    </div>
+
+    <!-- FICHA PATRIMONIAL DESCARGABLE -->
+    <section class="bg-white border-2 border-faded-copper/30 rounded-2xl overflow-hidden mb-12">
+      <div class="relative aspect-[21/9]">
+        <img src={`/img/episodes/${e.slug}.jpg`} alt={`Fotografía de ${e.title}`} class="w-full h-full object-cover"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-pitch-black-950/70 to-transparent"></div>
+        <p class="absolute bottom-4 left-6 text-camel-100 text-sm font-medium">Registro fotográfico del proceso patrimonial · 2027</p>
+      </div>
+      <div class="p-6 md:p-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <h2 class="font-serif font-black text-2xl">Ficha patrimonial</h2>
+        <div class="flex gap-3">
+          <a href="#" class="bg-faded-copper hover:bg-faded-copper-700 text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors">Descargar PDF</a>
+          <a href="#" class="border-2 border-crushed-berry-600 text-crushed-berry-600 hover:bg-crushed-berry-600 hover:text-white text-sm font-bold px-5 py-2.5 rounded-full transition-colors">Imprimir</a>
+        </div>
+      </div>
+      <dl class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-5 text-sm">
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Elemento patrimonial</dt><dd class="font-medium">{e.title}</dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Categoría</dt><dd class="font-medium">{e.type}</dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Duración</dt><dd class="font-medium">{e.duration}</dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Portadores/as</dt><dd class="font-medium">Lorem ipsum dolor sit amet</dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Técnicas</dt><dd class="font-medium">Lorem ipsum · dolor sit</dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Ubicación</dt><dd class="font-medium">Curacaví, Región Metropolitana</dd></div>
+        <div><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Valor patrimonial</dt><dd class="font-medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</dd></div>
+        <div class="sm:col-span-2"><dt class="text-xs uppercase tracking-widest text-pitch-black-900/50 font-bold mb-1">Riesgo de pérdida</dt>
+          <dd class="font-medium flex items-center gap-2"><span class="w-full max-w-[180px] h-2 bg-camel-300 rounded-full overflow-hidden"><span class="block h-full w-4/5 bg-crushed-berry-600 rounded-full"></span></span> Alto (80%)</dd></div>
+      </dl>
+      </div>
+    </section>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <section class="md:col-span-2">
+        <h2 class="font-serif font-black text-2xl mb-3">Transcripción</h2>
+        <p class="text-pitch-black-900/70 text-sm leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="text-pitch-black-900/70 text-sm leading-relaxed mt-4">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <h2 class="font-serif font-black text-2xl mt-10 mb-3">Galería fotográfica</h2>
+        <div class="grid grid-cols-3 gap-3">
+          <img src={`/img/episodes/${e.slug}.jpg`} alt={`Fotografía de ${e.title}`} class="aspect-square object-cover rounded-xl col-span-2 row-span-2"/>
+          {[1,2].map(i => (
+            <div class="aspect-square bg-faded-copper-100 rounded-xl grid place-items-center text-xs text-faded-copper-700 font-bold">Foto {i}</div>
+          ))}
+        </div>
+      </section>
+      <aside>
+        <div class="bg-mahogany-red-900 text-camel-50 rounded-2xl p-6 sticky top-28 border-b-8 border-faded-copper">
+          <h3 class="font-serif font-bold text-xl mb-4">Sobre este episodio</h3>
+          <ul class="text-sm space-y-3">
+            <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Estado</span><span class="font-bold">{e.status}</span></li>
+            <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Episodio</span><span class="font-bold">{String(e.num).padStart(2,'0')}/10</span></li>
+            <li class="flex justify-between border-b border-camel-100/10 pb-2"><span class="text-camel-50/60">Licencia</span><span class="font-bold">CC BY-NC</span></li>
+          </ul>
+          <a href="#" class="mt-6 block text-center bg-camel-100 text-mahogany-red-900 text-sm font-bold px-4 py-3 rounded-full hover:bg-camel-300 transition-colors">Ver en YouTube</a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</Base>

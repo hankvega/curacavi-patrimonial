@@ -1,0 +1,99 @@
+---
+interface Episode { slug: string; num: number; title: string; type: string; desc: string; duration: string; status: string; }
+interface Props { episodes: Episode[] }
+const { episodes } = Astro.props;
+// Posiciones de los pines dentro del viewBox (x, y) — AJUSTAR AQUÍ la ubicación
+const pos: Record<number, [number, number]> = {
+  1:[120,110], 2:[210,150], 3:[160,220], 4:[90,180], 5:[250,90],
+  6:[300,170], 7:[190,260], 8:[260,300], 9:[140,320], 10:[330,240],
+};
+const typeColor: Record<string, string> = {
+  'Oficio':'#29bdad', 'Tradición':'#e81900', 'Memoria':'#16e943', 'Paisaje cultural':'#fd68bd',
+};
+---
+<div class="bg-white rounded-2xl border-2 border-faded-copper-300 shadow-sm overflow-hidden">
+  <!-- Leyenda -->
+  <div class="flex flex-wrap gap-4 px-5 py-3 border-b border-faded-copper-200 text-xs font-bold uppercase tracking-wider text-pitch-black-900/70">
+    {Object.entries(typeColor).map(([t, c]) => (
+      <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full" style={`background:${c}`}></span>{t}</span>
+    ))}
+  </div>
+
+  <div class="grid lg:grid-cols-[1fr_340px]">
+    <!-- MAPA (ajustar alto en el class del svg: h-[520px] u h-auto) -->
+    <div class="relative">
+      <svg viewBox="0 0 420 400" class="w-full h-[420px] lg:h-[520px] bg-gradient-to-b from-faded-copper-100 to-camel-50" role="img" aria-label="Mapa interactivo del patrimonio de Curacaví">
+        <!-- Río Puangue -->
+        <path d="M-10 60 C 80 100, 60 200, 130 250 S 250 340, 260 410" fill="none" stroke="#29bdad" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+        <!-- Caminos -->
+        <path d="M20 380 L 400 30" stroke="#90ddd4" stroke-width="3" stroke-dasharray="8 6" fill="none"/>
+        <path d="M30 30 L 390 370" stroke="#90ddd4" stroke-width="3" stroke-dasharray="8 6" fill="none"/>
+        <!-- Zona urbana -->
+        <ellipse cx="200" cy="200" rx="70" ry="55" fill="#ffd1eb" opacity="0.35"/>
+        <text x="210" y="205" text-anchor="middle" font-size="13" fill="#000333" font-weight="700" opacity="0.6">Curacaví</text>
+        <!-- Pines -->
+        {episodes.map(e => {
+          const [x, y] = pos[e.num] ?? [200, 200];
+          return (
+            <g class="map-pin cursor-pointer" data-slug={e.slug} tabindex="0" role="button" aria-label={`Ver episodio: ${e.title}`}>
+              <circle cx={x} cy={y} r="16" fill={typeColor[e.type]} opacity="0.25" class="pulse"/>
+              <circle cx={x} cy={y} r="9" fill={typeColor[e.type]} stroke="#fff" stroke-width="2.5"/>
+              <text x={x} y={y + 3.5} text-anchor="middle" font-size="9" font-weight="800" fill="#fff">{e.num}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+
+    <!-- BARRA LATERAL: fichas de los puntos -->
+    <aside id="map-sidebar" class="border-t lg:border-t-0 lg:border-l border-faded-copper-200 bg-camel-50 max-h-[420px] lg:max-h-[520px] overflow-y-auto" aria-label="Puntos del mapa">
+      <p class="sticky top-0 bg-orange-600 text-camel-100 text-xs font-bold uppercase tracking-[0.25em] px-5 py-3">10 expresiones de patrimonio</p>
+      <ul>
+        {episodes.map(e => (
+          <li>
+            <a href={`/episodios/${e.slug}`} data-slug={e.slug}
+              class="map-item flex items-start gap-3 px-5 py-3.5 border-b border-faded-copper-200/60 hover:bg-white transition-colors">
+              <span class="mt-1 w-3.5 h-3.5 rounded-full shrink-0 ring-4 ring-white shadow" style={`background:${typeColor[e.type]}`}></span>
+              <span class="flex-1">
+                <span class="flex items-baseline gap-2">
+                  <span class="font-nunito font-black text-faded-copper-700 text-sm">{String(e.num).padStart(2,'0')}</span>
+                  <span class="font-arvo font-bold text-pitch-black-900 leading-snug">{e.title}</span>
+                </span>
+                <span class="block text-xs text-pitch-black-900/55 mt-0.5">{e.type} · {e.duration}</span>
+              </span>
+              <span class="text-faded-copper-600 self-center">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  </div>
+
+  <style>
+    .pulse { animation: pulse 2s infinite; transform-origin: center; transform-box: fill-box; }
+    @keyframes pulse { 0%,100% { transform: scale(1); opacity:.25 } 50% { transform: scale(1.35); opacity:.08 } }
+    /* Sincronización pin <-> ficha lateral */
+    .map-item.active { background: #fff; box-shadow: inset 4px 0 0 #b51400; }
+    .map-pin.active circle:last-of-type { stroke: #b51400; stroke-width: 4; }
+  </style>
+  <script>
+    const pins = document.querySelectorAll('.map-pin');
+    const items = document.querySelectorAll('.map-item');
+    function sync(slug: string | null) {
+      pins.forEach(p => p.classList.toggle('active', p.getAttribute('data-slug') === slug));
+      items.forEach(i => i.classList.toggle('active', i.getAttribute('data-slug') === slug));
+    }
+    pins.forEach(pin => {
+      const slug = pin.getAttribute('data-slug');
+      pin.addEventListener('mouseenter', () => sync(slug));
+      pin.addEventListener('focus', () => sync(slug));
+      pin.addEventListener('mouseleave', () => sync(null));
+      pin.addEventListener('click', () => { location.href = '/episodios/' + slug; });
+    });
+    items.forEach(item => {
+      const slug = item.getAttribute('data-slug');
+      item.addEventListener('mouseenter', () => sync(slug));
+      item.addEventListener('mouseleave', () => sync(null));
+    });
+  </script>
+</div>

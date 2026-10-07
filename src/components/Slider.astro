@@ -1,0 +1,48 @@
+---
+import episodes from '../data/episodes.json';
+---
+<section class="relative bg-pitch-black-950 overflow-hidden" aria-roledescription="carrusel" aria-label="Destacados del patrimonio">
+  <div id="slider" class="relative h-[60vh] md:h-[72vh]">
+    {episodes.slice(0, 6).map((e, i) => (
+      <figure class="slider-slide absolute inset-0 transition-opacity duration-700" data-index={i} style={i === 0 ? "opacity:1" : "opacity:0"}>
+        <img src={`/img/episodes/${e.slug}.jpg`} alt={`${e.title} — ${e.type}`}
+          class="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} />
+        <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-pitch-black-950/90 to-transparent p-6 md:p-10">
+          <div class="max-w-6xl mx-auto">
+            <p class="text-xs font-bold uppercase tracking-[0.3em] font-arvo text-faded-copper-300 mb-2">{e.type} · Episodio {String(e.num).padStart(2,'0')}</p>
+            <a href={`/episodios/${e.slug}`} class="font-arvo font-black text-2xl md:text-4xl text-camel-100 hover:text-crushed-berry-300 transition-colors">{e.title} →</a>
+          </div>
+        </figcaption>
+      </figure>
+    ))}
+    <!-- Flechas -->
+    <button id="slider-prev" aria-label="Anterior" class="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-pitch-black-950/50 text-camel-100 text-xl hover:bg-orange-600 transition-colors">←</button>
+    <button id="slider-next" aria-label="Siguiente" class="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-pitch-black-950/50 text-camel-100 text-xl hover:bg-crushed-berry-600 transition-colors">→</button>
+  </div>
+  <!-- Puntos -->
+  <div class="absolute bottom-4 inset-x-0 flex justify-center gap-2 z-10">
+    {episodes.slice(0, 6).map((_, i) => (
+      <button class="slider-dot w-2.5 h-2.5 rounded-full bg-camel-100/40 transition-all" data-index={i} aria-label={`Ir a la foto ${i+1}`}></button>
+    ))}
+  </div>
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slider-slide'));
+    const dots = Array.from(document.querySelectorAll('.slider-dot'));
+    let current = 0, timer;
+    const N = slides.length;
+    function show(i) {
+      current = (i + N) % N;
+      slides.forEach((s, k) => (s as HTMLElement).style.opacity = k === current ? '1' : '0');
+      dots.forEach((d, k) => {
+        d.classList.toggle('bg-camel-100', k === current);
+        d.classList.toggle('bg-camel-100/40', k !== current);
+        d.classList.toggle('w-6', k === current);
+      });
+    }
+    function auto() { clearInterval(timer); timer = setInterval(() => show(current + 1), 5000); }
+    document.getElementById('slider-prev')?.addEventListener('click', () => { show(current - 1); auto(); });
+    document.getElementById('slider-next')?.addEventListener('click', () => { show(current + 1); auto(); });
+    dots.forEach(d => d.addEventListener('click', () => { show(Number((d as HTMLElement).dataset.index)); auto(); }));
+    show(0); auto();
+  </script>
+</section>

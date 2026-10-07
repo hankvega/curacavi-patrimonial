@@ -1,0 +1,83 @@
+---
+import Logo from './Logo.astro';
+interface Props { fixed?: boolean }
+const { fixed = false } = Astro.props;
+const nav = [
+  { href: '/', label: 'Inicio' },
+  { href: '/episodios', label: 'Episodios' },
+  { href: '/patrimonio', label: 'Patrimonio' },
+  { href: '/comunidad', label: 'Comunidad' },
+  { href: '/material-educativo', label: 'Material Educativo' },
+];
+---
+<!-- Barra superior: aparece al hacer scroll (o fija en subpáginas) -->
+<header id="topbar" class:list={[
+  "fixed top-0 inset-x-0 z-50 transition-transform duration-300",
+  fixed ? "translate-y-0" : "-translate-y-full",
+  "bg-mist-900/50 backdrop-blur border-b-2 border-teal-300/30",
+]}>
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <Logo light size={34} />
+    <!-- Buscador compacto -->
+    <form action="/episodios" method="get" class="hidden md:block flex-1 max-w-xs mx-8">
+      <label class="relative block">
+        <span class="sr-only">Buscar en el archivo</span>
+        <input type="search" name="q" placeholder="Buscar patrimonio…"
+          class="w-full bg-mist-950/60 border border-faded-copper-300/40 rounded-full pl-4 pr-10 py-2 text-sm text-camel-100 placeholder:text-camel-100/40 focus:border-faded-copper-300 focus:outline-none"/>
+        <button type="submit" aria-label="Buscar" class="absolute right-2 top-1/2 -translate-y-1/2 text-faded-copper-300 hover:text-camel-100 transition-colors">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </button>
+      </label>
+    </form>
+    <!-- Botón sándwich -->
+    <button id="menu-btn" class="flex flex-col justify-center gap-[6px] w-10 h-10 items-end group" aria-label="Abrir menú" aria-expanded="false">
+      <span class="block h-[3px] w-8 bg-camel-100 group-hover:w-6 transition-all"></span>
+      <span class="block h-[3px] w-8 bg-faded-copper-300 transition-all"></span>
+      <span class="block h-[3px] w-8 bg-camel-100 group-hover:w-6 transition-all"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Menú overlay a pantalla completa -->
+<div id="menu-overlay" class="fixed inset-0 z-[60] hidden bg-mist-950">
+  <div class="h-full max-w-6xl mx-auto px-4 py-6 flex flex-col">
+    <div class="flex items-center justify-between">
+      <Logo light size={34} />
+      <button id="menu-close" class="text-camel-100 text-4xl leading-none hover:text-crushed-berry-400 transition-colors" aria-label="Cerrar menú">✕</button>
+    </div>
+    <nav class="flex-1 flex flex-col justify-center items-center gap-2 md:gap-4">
+      {nav.map((i, idx) => (
+        <a href={i.href} class="menu-link font-arvo font-black text-4xl md:text-6xl text-camel-100 hover:text-crushed-berry-400 transition-colors flex items-baseline gap-4">
+          <span class="text-sm font-nunito font-bold text-faded-copper-300 tracking-widest">{String(idx + 1).padStart(2, '0')}</span>
+          {i.label}
+        </a>
+      ))}
+    </nav>
+    <form action="/episodios" method="get" class="md:hidden pb-4">
+      <input type="search" name="q" placeholder="Buscar patrimonio…"
+        class="w-full bg-mist-900/60 border border-faded-copper-300/40 rounded-full px-5 py-3 text-camel-100 placeholder:text-camel-100/40 focus:border-faded-copper-300 focus:outline-none"/>
+    </form>
+    <p class="text-center font-nunito text-xs tracking-[0.3em] uppercase text-camel-100/40 pb-2">Curacaví Patrimonial · 2027</p>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('topbar');
+  const menuBtn = document.getElementById('menu-btn');
+  const overlay = document.getElementById('menu-overlay');
+  const closeBtn = document.getElementById('menu-close');
+  const FIXED = bar?.dataset.fixed === 'true';
+
+  // Mostrar barra al hacer scroll (si no es fija)
+  if (!FIXED && bar) {
+    const onScroll = () => bar.classList.toggle('translate-y-0', window.scrollY > 160);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+  const openMenu = () => { overlay?.classList.remove('hidden'); document.body.style.overflow = 'hidden'; menuBtn?.setAttribute('aria-expanded', 'true'); };
+  const closeMenu = () => { overlay?.classList.add('hidden'); document.body.style.overflow = ''; menuBtn?.setAttribute('aria-expanded', 'false'); };
+  menuBtn?.addEventListener('click', openMenu);
+  closeBtn?.addEventListener('click', closeMenu);
+  overlay?.querySelectorAll('.menu-link').forEach(a => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+</script>

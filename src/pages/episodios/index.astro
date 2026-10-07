@@ -1,0 +1,56 @@
+---
+import Base from '../../layouts/Base.astro';
+import EpisodeCard from '../../components/EpisodeCard.astro';
+import episodes from '../../data/episodes.json';
+const types = [...new Set(episodes.map(e => e.type))];
+---
+<Base title="Episodios">
+  <section class="max-w-6xl mx-auto px-4 py-16">
+    <h1 class="font-serif font-black text-4xl mb-2">Episodios</h1>
+    <p class="max-w-2xl text-pitch-black-900/70 mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cada episodio incluye transcripción, galería fotográfica y ficha patrimonial descargable.</p>
+
+    <div class="flex flex-col md:flex-row gap-4 mb-8">
+      <input id="search" type="search" placeholder="Buscar por título, técnica o portador…"
+        class="flex-1 bg-white border-2 border-faded-copper/40 rounded-full px-5 py-3 focus:border-faded-copper focus:outline-none placeholder:text-pitch-black-900/40"/>
+    </div>
+    <div class="flex flex-wrap gap-2 mb-10">
+      <button data-filter="all" class="filter-btn bg-mahogany-red-900 text-camel-50 text-sm font-bold px-4 py-2 rounded-full">Todos</button>
+      {types.map(t => <button data-filter={t} class="filter-btn border-2 border-faded-copper/40 text-sm font-bold px-4 py-2 rounded-full hover:border-faded-copper">{t}</button>)}
+    </div>
+
+    <p id="no-results" class="hidden text-center text-pitch-black-900/50 py-16">No se encontraron episodios para tu búsqueda.</p>
+    <div class="grid md:grid-cols-3 gap-6" id="grid">
+      {episodes.map(e => (
+        <div data-type={e.type} data-search={`${e.title} ${e.desc} ${e.type}`.toLowerCase()}>
+          <EpisodeCard episode={e} />
+        </div>
+      ))}
+    </div>
+  </section>
+  <script>
+    const search = document.getElementById('search') as HTMLInputElement;
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('#grid > div');
+    const noRes = document.getElementById('no-results');
+    let filter = 'all';
+    function apply() {
+      const q = search.value.trim().toLowerCase();
+      let visible = 0;
+      cards.forEach(c => {
+        const okType = filter === 'all' || c.getAttribute('data-type') === filter;
+        const okQuery = !q || (c.getAttribute('data-search') ?? '').includes(q);
+        const show = okType && okQuery;
+        (c as HTMLElement).style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      noRes?.classList.toggle('hidden', visible > 0);
+    }
+    search?.addEventListener('input', apply);
+    btns.forEach(btn => btn.addEventListener('click', () => {
+      filter = (btn as HTMLButtonElement).dataset.filter ?? 'all';
+      btns.forEach(b => { b.classList.remove('bg-mahogany-red-900','text-camel-50'); b.classList.add('border-2','border-faded-copper/40'); });
+      btn.classList.add('bg-mahogany-red-900','text-camel-50'); btn.classList.remove('border-2','border-faded-copper/40');
+      apply();
+    }));
+  </script>
+</Base>

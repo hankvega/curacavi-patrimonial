@@ -1,0 +1,26 @@
+---
+interface Props {
+  episode: {
+    slug: string; num: number; title: string; type: string;
+    desc: string; duration: string; status: string;
+  };
+}
+const { episode: e } = Astro.props;
+const typeStyle: Record<string, string> = {
+  'Oficio': 'bg-faded-copper', 'Tradición': 'bg-crushed-berry-600',
+  'Memoria': 'bg-camel-300 text-pitch-black-900', 'Paisaje cultural': 'bg-mahogany-red-900',
+};
+---
+<a href={`/episodios/${e.slug}`} class="group block bg-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all overflow-hidden border-b-4 border-faded-copper">
+  <div class="aspect-video relative overflow-hidden">
+    <img src={`/img/episodes/${e.slug}.jpg`} alt={e.title} loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+    <span class:list={['absolute top-3 left-3 text-xs font-bold text-camel-100 px-2.5 py-1 rounded-full', typeStyle[e.type] ?? 'bg-faded-copper']}>{e.type}</span>
+    {e.status === 'Próximamente' && <span class="absolute top-3 right-3 text-xs bg-camel-100 text-pitch-black-900 font-bold px-2.5 py-1 rounded-full">Próximamente</span>}
+  </div>
+  <div class="p-5">
+    <h3 class="font-nunito text-xl leading-snug mb-2 group-hover:text-rose-600 transition-colors">E{e.num} · {e.title}</h3>
+    <p class="text-sm text-pitch-black-900/60 line-clamp-3">{e.desc}</p>
+    <p class="text-xs text-faded-copper-700 mt-3 font-bold uppercase tracking-wider">{e.duration}</p>
+  </div>
+</a>

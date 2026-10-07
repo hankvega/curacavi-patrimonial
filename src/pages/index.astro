@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import EpisodeCard from '../components/EpisodeCard.astro';
+import Map from '../components/Map.astro';
+import Slider from '../components/Slider.astro';
+import episodes from '../data/episodes.json';
+const latest = episodes.slice(0, 3);
+---
+<Base title="Inicio" description="Curacaví Patrimonial: 10 video podcasts que documentan el patrimonio vivo de Curacaví en riesgo de desaparición." masthead>
+
+  <!-- SLIDER DE FOTOS -->
+  <Slider />
+
+  <!-- HERO tipográfico (sin video) -->
+  <section class="bg-rose-700 text-camel-50 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-15" style="background-image:repeating-linear-gradient(45deg, #ffa6d9 0 2px, transparent 2px 26px), repeating-linear-gradient(-45deg, #fff2f9 0 2px, transparent 2px 26px);"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <p class="text-faded-copper-300 font-bold uppercase tracking-[0.3em] text-xs mb-5">Fondo del Patrimonio Cultural · RM · 2027</p>
+      <h1 class="font-arvo font-black text-4xl md:text-6xl leading-[1.05] max-w-3xl">
+        La historia de<br/><span class="text-camel-100">una comunidad</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg text-camel-50/85">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diez video podcasts y un archivo abierto que registran oficios, tradiciones y memorias ante su riesgo de desaparición.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a href="/episodios" class="bg-faded-copper hover:bg-faded-copper-700 text-white font-arvo font-bold px-7 py-3 rounded-full transition-colors">Ver episodios</a>
+        <a href="/patrimonio" class="border-2 border-camel-100/50 hover:border-camel-100 text-camel-50 font-bold px-7 py-3 rounded-full transition-colors">Explorar el mapa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <section class="bg-camel-100 border-y-2 border-mahogany-red-900">
+    <dl class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-3 gap-4 text-center">
+      <div><dt class="font-serif font-black text-4xl text-rose-700">10</dt><dd class="text-xs uppercase tracking-widest text-pitch-black-900/60 mt-1">video podcasts</dd></div>
+      <div><dt class="font-serif font-black text-4xl text-rose-700">+20</dt><dd class="text-xs uppercase tracking-widest text-pitch-black-900/60 mt-1">portadores de memoria</dd></div>
+      <div><dt class="font-serif font-black text-4xl text-rose-700">100%</dt><dd class="text-xs uppercase tracking-widest text-pitch-black-900/60 mt-1">gratuito y abierto</dd></div>
+    </dl>
+  </section>
+
+  <!-- MAPA INTERACTIVO -->
+  <section class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="font-nunito text-teal-600 font-black text-3xl mb-2">El patrimonio en el territorio</h2>
+    <p class="max-w-2xl text-pitch-black-900/70 mb-8 font-arvo">Haz clic en cada punto para conocer la expresión patrimonial y su episodio.</p>
+    <Map episodes={episodes} />
+  </section>
+
+  <!-- ÚLTIMOS EPISODIOS -->
+  <section class="max-w-6xl mx-auto px-4 pb-16">
+    <div class="flex items-end justify-between mb-8">
+      <h2 class="font-nunito text-rose-600 font-black text-3xl ">Últimos episodios</h2>
+      <a href="/episodios" class="text-teal-600 font-bold hover:underline">Ver todos →</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      {latest.map(e => <EpisodeCard episode={e} />)}
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS -->
+  <section class="bg-faded-copper-100 border-y border-faded-copper/30">
+    <div class="max-w-6xl mx-auto px-4 py-14">
+      <h2 class="font-nunito text-teal-600 font-black text-3xl mb-8">Patrimonio vivo en riesgo</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          ['Oficios', 'Chicha · Talabartería · Bordado · Repostería', '/episodios?q=Oficio'],
+          ['Tradiciones', 'Cuasimodo · Danza folclórica', '/episodios?q=Tradición'],
+          ['Memorias', 'Gümera · Museo Coculcom · Museo del Audio', '/episodios?q=Memoria'],
+          ['Paisajes culturales', 'Parque San Mateo', '/episodios?q=Paisaje'],
+        ].map(([t, d, href]) => (
+          <a href={href} class="bg-white rounded-2xl p-5 border-b-4 border-faded-copper hover:border-crushed-berry-600 hover:shadow-lg transition-all">
+            <p class="font-arvo font-bold text-lg mb-1">{t}</p>
+            <p class="text-xs font-nunito text-pitch-black-900/60">{d}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- COMUNIDAD -->
+  <section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h2 class="font-nunito font-black text-3xl mb-4">Hecho con la comunidad</h2>
+      <p class="text-pitch-black-900/70 mb-6 font-arvo">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Los portadores validan sus relatos antes de la publicación; cada episodio se devuelve en alta calidad y se proyecta en colegios, bibliotecas y juntas de vecinos.</p>
+      <a href="/comunidad" class="text-orange-600 font-bold hover:underline">Conoce a los portadores →</a>
+    </div>
+    <div class="bg-orange-600 text-camel-50 rounded-2xl p-8 border-b-8 border-faded-copper">
+      <p class="font-arvo font-bold text-2xl mb-2">Visualizaciones comunitarias</p>
+      <p class="text-camel-50/75 text-sm mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p class="font-serif font-black text-6xl text-lime-200">+150</p>
+      <p class="text-xs text-camel-50/60 mt-1 uppercase tracking-widest">asistentes esperados 2027</p>
+    </div>
+  </section>
+</Base>

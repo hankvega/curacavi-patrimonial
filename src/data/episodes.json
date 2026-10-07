@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "la-chicha-de-curacavi",
+    "num": 1,
+    "title": "La chicha de Curacaví",
+    "type": "Oficio",
+    "desc": "Cosecha, zarandeo en coligües, cocción en pailas de cobre y fermentación en tinajas de greda: los saberes de los últimos chicheros acreditados ante INDAP.",
+    "duration": "32 min",
+    "status": "Disponible"
+  },
+  {
+    "slug": "talabarteria-tradicion-del-cuero",
+    "num": 2,
+    "title": "Talabartería: tradición del cuero",
+    "type": "Oficio",
+    "desc": "El trabajo del cuero transmitido por tres generaciones: herramientas, técnicas y memoria de los arreos y la vida huasa.",
+    "duration": "28 min",
+    "status": "Disponible"
+  },
+  {
+    "slug": "bordadoras-del-puangue",
+    "num": 3,
+    "title": "Bordadoras del Puangue",
+    "type": "Oficio",
+    "desc": "Mujeres guardianas del bordado tradicional: puntadas heredadas que narran identidad, fe y territorio en las manos de la agrupación.",
+    "duration": "30 min",
+    "status": "Disponible"
+  },
+  {
+    "slug": "reposteria-de-la-memoria",
+    "num": 4,
+    "title": "Repostería de la memoria",
+    "type": "Oficio",
+    "desc": "Recetas heredadas de dulces y repostería curacavina: sabores que resisten la industrialización y conservan la cocina de las abuelas.",
+    "duration": "26 min",
+    "status": "Próximamente"
+  },
+  {
+    "slug": "fiesta-de-cuasimodo",
+    "num": 5,
+    "title": "Fiesta de Cuasimodo",
+    "type": "Tradición",
+    "desc": "Devoción, territorio y cultura huasa: la fiesta que articula a la comunidad y cuya transmisión oral necesita registro audiovisual.",
+    "duration": "35 min",
+    "status": "Disponible"
+  },
+  {
+    "slug": "academia-guzman-danza-folclorica",
+    "num": 6,
+    "title": "Academia Guzmán: danza folclórica",
+    "type": "Tradición",
+    "desc": "El relevo de las danzas folclóricas: pasos, trajes y oficio de enseñar a bailar a nuevas generaciones.",
+    "duration": "29 min",
+    "status": "Próximamente"
+  },
+  {
+    "slug": "luis-gumera-cronista",
+    "num": 7,
+    "title": "Luis “Chito” Gümera, cronista",
+    "type": "Memoria",
+    "desc": "\"En la ribera del Puangue\": el cronista que guarda la historia escrita de Curacaví y las voces de quienes la vivieron.",
+    "duration": "31 min",
+    "status": "Disponible"
+  },
+  {
+    "slug": "museo-coculcom",
+    "num": 8,
+    "title": "Museo Coculcom",
+    "type": "Memoria",
+    "desc": "Objetos y fotografías donados por los habitantes: la memoria comunitaria resguardada bajo el liderazgo de Nelda Calderón.",
+    "duration": "27 min",
+    "status": "Próximamente"
+  },
+  {
+    "slug": "museo-del-audio",
+    "num": 9,
+    "title": "Museo del Audio de Cuyuncaví",
+    "type": "Memoria",
+    "desc": "Más de 200 años de historia de la reproducción sonora en un museo inscrito en el Registro de Museos de Chile.",
+    "duration": "33 min",
+    "status": "Próximamente"
+  },
+  {
+    "slug": "parque-san-mateo",
+    "num": 10,
+    "title": "Parque San Mateo",
+    "type": "Paisaje cultural",
+    "desc": "Un bosque nativo construido por vecinos con metodología Miyawaki desde 2019: recuperación socioecológica y educación ambiental intergeneracional.",
+    "duration": "30 min",
+    "status": "Próximamente"
+  }
+]

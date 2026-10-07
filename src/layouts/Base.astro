@@ -1,0 +1,28 @@
+---
+interface Props { title: string; description?: string; masthead?: boolean }
+const { title, description = 'Registro audiovisual del patrimonio vivo de Curacaví', masthead = false } = Astro.props;
+import Header from '../components/Header.astro';
+import Masthead from '../components/Masthead.astro';
+import Footer from '../components/Footer.astro';
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1c0300" />
+    <title>{title} · Curacaví Patrimonial</title>
+  </head>
+  <body class="bg-camel-50 text-pitch-black-900 font-sans antialiased">
+    <Header fixed={!masthead} />
+    {masthead && <Masthead />}
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

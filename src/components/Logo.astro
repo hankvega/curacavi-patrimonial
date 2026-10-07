@@ -1,0 +1,24 @@
+---
+interface Props { light?: boolean; size?: number; showWordmark?: boolean }
+const { light = false, size = 44, showWordmark = true } = Astro.props;
+const ink = light ? '#fff2f9' : '#1f1814';
+---
+<a href="/" class="flex items-center gap-3 group w-fit "  aria-label="Curacaví Patrimonial — inicio">
+  <!-- Isotipo: C de imprenta + estandarte rojo con diana -->
+  <svg width={size} height={size * 1.1} viewBox="0 0 100 110" class="shrink-0" aria-hidden="true">
+    <!-- C negra (trazo de imprenta con apertura) -->
+    <circle cx="50" cy="50" r="36" fill="none" stroke={ink} stroke-width="20"
+      stroke-dasharray="176 50.2" transform="rotate(-40 50 50)" stroke-linecap="butt"/>
+    <!-- Estandarte crushed berry con punta de cola de milano -->
+    <path d="M40 20 h20 v70 l-10 14 -10 -14 z" fill="#29bdad"/>
+    <!-- Diana / sol sobre el estandarte -->
+    <circle cx="50" cy="58" r="11" fill="#fff2f9"/>
+    <circle cx="50" cy="58" r="4.5" fill="#29bdad"/>
+  </svg>
+  {showWordmark && (
+    <span class="leading-none">
+      <span class:list={["block font-arvo font-black text-xl tracking-tight group-hover:text-crushed-berry-600 transition-colors", light ? "text-camel-100" : "text-pitch-black-900"]}>CURACAVÍ</span>
+      <span class:list={["block text-[10px] font-nunito font-bold tracking-[0.35em] uppercase mt-1", light ? "text-faded-copper-300" : "text-faded-copper-600"]}>Patrimonial</span>
+    </span>
+  )}
+</a>

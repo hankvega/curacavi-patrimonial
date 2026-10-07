@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  /* faded-copper */
+  --color-faded-copper-50: #f0faf9;
+  --color-faded-copper-100: #dff5f3;
+  --color-faded-copper-200: #bbeae5;
+  --color-faded-copper-300: #90ddd4;
+  --color-faded-copper-400: #5ccdc1;
+  --color-faded-copper-500: #29bdad;
+  --color-faded-copper-600: #209387;
+  --color-faded-copper-700: #186e64;
+  --color-faded-copper-800: #104842;
+  --color-faded-copper-900: #082623;
+  --color-faded-copper-950: #051513;
+
+  /* crushed-berry */
+  --color-crushed-berry-50: #fdefed;
+  --color-crushed-berry-100: #fcdcd9;
+  --color-crushed-berry-200: #f8b5ad;
+  --color-crushed-berry-300: #f3877a;
+  --color-crushed-berry-400: #ee503d;
+  --color-crushed-berry-500: #e81900;
+  --color-crushed-berry-600: #b51400;
+  --color-crushed-berry-700: #870e00;
+  --color-crushed-berry-800: #580a00;
+  --color-crushed-berry-900: #2e0500;
+  --color-crushed-berry-950: #1a0300;
+
+  /* camel */
+  --color-camel-50: #fff9fc;
+  --color-camel-100: #fff2f9;
+  --color-camel-200: #ffe3f3;
+  --color-camel-300: #ffd1eb;
+  --color-camel-400: #ffbbe2;
+  --color-camel-500: #ffa6d9;
+  --color-camel-600: #c781a9;
+  --color-camel-700: #94607e;
+  --color-camel-800: #613f52;
+  --color-camel-900: #33212b;
+  --color-camel-950: #1c1218;
+
+  /* mahogany-red */
+  --color-mahogany-red-50: #fdefed;
+  --color-mahogany-red-100: #fcdcd9;
+  --color-mahogany-red-200: #f8b5ad;
+  --color-mahogany-red-300: #f3877a;
+  --color-mahogany-red-400: #ee503d;
+  --color-mahogany-red-500: #e81900;
+  --color-mahogany-red-600: #b51400;
+  --color-mahogany-red-700: #e45746;
+  --color-mahogany-red-800: #e5402c;
+  --color-mahogany-red-900: #e62b15;
+  --color-mahogany-red-950: #e81900;
+
+  /* sage */
+  --color-sage-50: #fafcf9;
+  --color-sage-100: #f4f9f1;
+  --color-sage-200: #e7f3e2;
+  --color-sage-300: #d7ebcf;
+  --color-sage-400: #c5e2b9;
+  --color-sage-500: #b3d9a3;
+  --color-sage-600: #8ca97f;
+  --color-sage-700: #687e5f;
+  --color-sage-800: #44523e;
+  --color-sage-900: #242b21;
+  --color-sage-950: #141812;
+
+  /* pitch-black (neutro, se mantiene) */
+  --color-pitch-black-50: #f5f1ef;
+  --color-pitch-black-100: #ebe4e0;
+  --color-pitch-black-200: #d8c8c0;
+  --color-pitch-black-300: #c4ada1;
+  --color-pitch-black-400: #b09182;
+  --color-pitch-black-500: #9d7662;
+  --color-pitch-black-600: #7d5e4f;
+  --color-pitch-black-700: #5e473b;
+  --color-pitch-black-800: #3f2f27;
+  --color-pitch-black-900: #1f1814;
+  --color-pitch-black-950: #16100e;
+
+  --font-arvo: 'Arvo', serif;
+  --font-nunito: "Nunito", sans-serif;
+}
