@@ -6,14 +6,14 @@ const types = [...new Set(episodes.map(e => e.type))];
 ---
 <Base title="Patrimonio">
   <section class="max-w-6xl mx-auto px-4 py-16">
-    <h1 class="font-serif font-black text-4xl mb-2">Mapa del patrimonio</h1>
+    <h1 class="font-arvo font-black text-4xl mb-2">Mapa del patrimonio</h1>
     <p class="max-w-2xl text-pitch-black-900/70 mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Haz clic en los pines para ir a cada episodio.</p>
     <Map episodes={episodes} />
   </section>
   <section class="max-w-6xl mx-auto px-4 pb-16">
     {types.map(t => (
       <div class="mb-10">
-        <h2 class="font-serif font-black text-2xl mb-4">{t}</h2>
+        <h2 class="font-arvo font-black text-2xl mb-4">{t}</h2>
         <div class="grid md:grid-cols-2 gap-4">
           {episodes.filter(e => e.type === t).map(e => (
             <a href={`/episodios/${e.slug}`} class="flex items-center gap-4 bg-white border-l-8 border-faded-copper rounded-xl p-4 hover:border-crushed-berry-600 hover:shadow-lg transition-all">
